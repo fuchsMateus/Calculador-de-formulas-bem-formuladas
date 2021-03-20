@@ -40,7 +40,6 @@ public class Main {
 		} while (enunciadoCorreto == false);
 
 		///////////////
-		sc.close();
 		FBF fbf = new FBF(enunciado);
 		fbf.inicializarFBF();
 			
@@ -50,6 +49,7 @@ public class Main {
 		
 		List<Integer[]> valoresPossiveis = Operacoes.getValoresPossiveis();
 		List<Variavel> variaveis = fbf.getVariaveis();
+		List<String> passoAPasso = Operacoes.getPassoAPasso();
 		
 		
 		//printar o resultado
@@ -68,7 +68,16 @@ public class Main {
 		String resultado = result.toString().replace('0', 'F');
 		resultado = resultado.replace('1', 'V');
 		System.out.println(resultado);
+		////////////////////////////////////////////////
+		System.out.print("Digite 1 para ver o passo a passo ou 0 para encerrar o programa: ");
+		int escolha = sc.nextInt();
+		sc.close();
+		if(escolha == 1) {
+			printSolucoes(passoAPasso, enunciado);
+		}
+	
 	}
+	
 	
 	public static boolean checaEnunciado(String enunciado) {
 		int nAParent = 0;
@@ -125,5 +134,24 @@ public class Main {
 		}
 		return true;
 		
+	}
+	
+	public static void printSolucoes(List<String> passoAPasso, String enunciado) {
+		int vControle = 1;
+		System.out.print(vControle+": "+enunciado+" = ");
+		for (int i = 0; i < passoAPasso.size(); i++) {
+			passoAPasso.set(i, passoAPasso.get(i).replace('0', 'F'));
+			passoAPasso.set(i, passoAPasso.get(i).replace('1', 'V'));
+			passoAPasso.set(i, passoAPasso.get(i).replace('*', '&'));
+			passoAPasso.set(i, passoAPasso.get(i).replace('+', '|'));
+			System.out.print(passoAPasso.get(i));
+			if(passoAPasso.get(i).contains("FIM") && i != passoAPasso.size()-1) {
+				System.out.println("\n");
+				System.out.print(++vControle+": "+enunciado+" = ");
+			}
+			else
+				if(i != passoAPasso.size()-1)
+				System.out.print(" = ");
+		}
 	}
 }

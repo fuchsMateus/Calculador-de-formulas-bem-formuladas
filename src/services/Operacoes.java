@@ -10,6 +10,7 @@ public class Operacoes {
 	
 	private static LinkedHashMap<Integer[], Integer> resultados = new LinkedHashMap<Integer[], Integer>();
 	private static List<Integer[]> valoresPossiveis = new ArrayList<>();
+	private static List<String> passoAPasso =  new ArrayList<String>();
 
 	public static void processar(List<Variavel> variaveis, String enunciado) {
 		
@@ -58,14 +59,14 @@ public class Operacoes {
 		}
 		
 		valoresPossiveis.add(valoresPossiveisVetor);
-		
+		passoAPasso.add(enunciado);
 		//passo2: processar todos os parenteses
 		enunciado = Operacoes.resolverComParenteses(enunciado);
 		
 		
 		while(enunciado.length() != 1) {
 			//transforma todas as negações
-			if(enunciado.contains("-"))
+			if(enunciado.contains("-")) {
 				for(int i = 0; i < enunciado.length(); i++) {
 					if(enunciado.charAt(i) == '-') {
 						if(enunciado.charAt(i+1) == '0') {
@@ -80,9 +81,11 @@ public class Operacoes {
 						}
 					}
 				}
+				passoAPasso.add(enunciado);
+			}
 			
 			//faz todas as somas
-			if(enunciado.contains("+"))
+			if(enunciado.contains("+")) {
 				for(int i = 0; i < enunciado.length(); i++) {
 					if(enunciado.charAt(i) == '+') {
 						
@@ -95,9 +98,11 @@ public class Operacoes {
 						i = 0;
 					}
 				}
+				passoAPasso.add(enunciado);
+			}
 			
 			//faz todas as multiplicações
-			if(enunciado.contains("*"))
+			if(enunciado.contains("*")) {
 				for(int i = 0; i < enunciado.length(); i++) {
 					if(enunciado.charAt(i) == '*') {
 						
@@ -108,6 +113,8 @@ public class Operacoes {
 						i = 0;
 					}	
 				}
+				passoAPasso.add(enunciado);
+			}
 			
 			//resolve a condicional sem parenteses
 			boolean temCondicional = false;
@@ -119,6 +126,7 @@ public class Operacoes {
 					} 	
 				}
 				temCondicional = true;
+				passoAPasso.add(enunciado);
 			}
 			if(temCondicional)
 				continue;
@@ -136,12 +144,14 @@ public class Operacoes {
 				}
 				enunciado = Operacoes.resolverComParenteses(enunciado);
 				temBiCondicional = true;
+				passoAPasso.add(enunciado);
 			}
 			if(temBiCondicional)
 				continue;
 		}
 		valorFinal = Integer.valueOf(enunciado);
-		
+		passoAPasso.add(enunciado);
+		passoAPasso.add("FIM");
 		resultados.put(valoresPossiveisVetor, valorFinal);
 		
 	}
@@ -155,7 +165,7 @@ public class Operacoes {
 			String enunciadoEntreParenteses = enunciado.substring(abreP+1, fechaP);
 			
 			//transforma todas as negações
-			if(enunciadoEntreParenteses.contains("-"))
+			if(enunciadoEntreParenteses.contains("-")) {
 				for(int i = 0; i < enunciadoEntreParenteses.length(); i++) {
 					if(enunciadoEntreParenteses.charAt(i) == '-') {
 						if(enunciadoEntreParenteses.charAt(i+1) == '0') {
@@ -170,9 +180,10 @@ public class Operacoes {
 						}
 					}
 				}
-			
+				passoAPasso.add(enunciado.substring(0, abreP+1)+enunciadoEntreParenteses+enunciado.substring(fechaP));
+			}
 			//faz todas as somas
-			if(enunciadoEntreParenteses.contains("+"))
+			if(enunciadoEntreParenteses.contains("+")) {
 				for(int i = 0; i < enunciadoEntreParenteses.length(); i++) {
 					if(enunciadoEntreParenteses.charAt(i) == '+') {
 						
@@ -185,9 +196,11 @@ public class Operacoes {
 						i = 0;
 					}
 				}
+				passoAPasso.add(enunciado.substring(0, abreP+1)+enunciadoEntreParenteses+enunciado.substring(fechaP));
+			}
 			
 			//faz todas as multiplicações
-			if(enunciadoEntreParenteses.contains("*"))
+			if(enunciadoEntreParenteses.contains("*")) {
 				for(int i = 0; i < enunciadoEntreParenteses.length(); i++) {
 					if(enunciadoEntreParenteses.charAt(i) == '*') {
 						
@@ -198,6 +211,8 @@ public class Operacoes {
 						i = 0;
 					}	
 				}
+				passoAPasso.add(enunciado.substring(0, abreP+1)+enunciadoEntreParenteses+enunciado.substring(fechaP));
+			}
 					
 			//resolve todas as condicionais
 			boolean temCondicional = false;
@@ -209,6 +224,7 @@ public class Operacoes {
 					} 	
 				}
 				enunciado = enunciado.substring(0, abreP+1)+enunciadoEntreParenteses+enunciado.substring(fechaP);
+				passoAPasso.add(enunciado);
 				temCondicional = true;
 			}
 		
@@ -227,6 +243,7 @@ public class Operacoes {
 					} 	
 				}
 				enunciado = enunciado.substring(0, abreP+1)+enunciadoEntreParenteses+enunciado.substring(fechaP);
+				passoAPasso.add(enunciado);
 				temBiCondicional = true;
 			}
 		
@@ -235,6 +252,7 @@ public class Operacoes {
 			
 			//retira os parenteses
 			enunciado = enunciado.substring(0, abreP)+enunciadoEntreParenteses+enunciado.substring(fechaP+1);
+			passoAPasso.add(enunciado);
 		}
 		return enunciado;
 	}
@@ -245,6 +263,10 @@ public class Operacoes {
 
 	public static List<Integer[]> getValoresPossiveis() {
 		return valoresPossiveis;
+	}
+
+	public static List<String> getPassoAPasso() {
+		return passoAPasso;
 	}
 
 	
