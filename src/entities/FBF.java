@@ -18,6 +18,7 @@ public class FBF {
 	}
 	//preenche a lista de variaveis
 	public void inicializarFBF() {
+		variaveis.clear();
 		if(enunciado.contains("A")) 
 			variaveis.add(new Variavel("A"));
 		
@@ -44,6 +45,9 @@ public class FBF {
 	}
 	public List<Variavel> getVariaveis() {
 		return variaveis;
+	}
+	public void setVariaveis(List<Variavel> variaveis) {
+		this.variaveis = variaveis;
 	}
 	
 	

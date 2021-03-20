@@ -26,9 +26,7 @@ public class Painel2 extends JPanel{
 	 */
 	private static final long serialVersionUID = 1960628858830049130L;
 	
-	private List<Variavel> variaveis;
 	
-	private JLabel titulo = new JLabel("Calculador de FBFs");
 	private JButton voltar = new JButton("Voltar");
 	private JButton resolucao = new JButton("Resolução");
 	private JTable table;
@@ -57,16 +55,15 @@ public class Painel2 extends JPanel{
 		List<Integer[]> valoresPossiveis = Operacoes.getValoresPossiveis();
 		List<String> passoAPasso = Operacoes.getPassoAPasso();
 		
+		
 		String[] columns = new String[variaveis.size()+1];
 		
 		for (int i = 0; i < variaveis.size(); i++) {
 			columns[i] = variaveis.get(i).getNome();
 		}
-		columns[variaveis.size()] = enunciado;
-		
+		columns[variaveis.size()] = enunciado;		
 		
 		String[][] data = new String [valoresPossiveis.size()][variaveis.size()+1];
-		
 		
 		for (int i = 0; i < valoresPossiveis.size(); i++) {
 			for (int j = 0; j < variaveis.size(); j++) {
@@ -83,6 +80,7 @@ public class Painel2 extends JPanel{
 		
 		table = new JTable(data, columns);
 		table.setEnabled(false);
+		
 		
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
@@ -119,33 +117,18 @@ public class Painel2 extends JPanel{
 		gridBagConstraints.gridy++;
 		add(Box.createVerticalStrut(10), gridBagConstraints);
 		
-	
-		
-		
-		
-	
-		
-		/*printar o resultado
-				StringBuilder result = new StringBuilder();
-				result.append("\n");
-				for (Variavel variavel : variaveis) {
-					result.append(variavel.getNome()+" ");
-				}
-				result.append("\n");
-				for (int i = 0; i < resultados.size(); i++) {
-					for (int j = 0; j < valoresPossiveis.get(0).length; j++) {
-						result.append(valoresPossiveis.get(i)[j]+"|");
-					}
-					result.append("= "+resultados.get(valoresPossiveis.get(i))+"\n");
-				}
-				String resultado = result.toString().replace('0', 'F');
-				resultado = resultado.replace('1', 'V');
-				System.out.println(resultado);
-				*/
+
 	}
 
 
-	
+	public JButton getVoltar() {
+		return voltar;
+	}
+
+
+	public JButton getResolucao() {
+		return resolucao;
+	}
 
 	
 }

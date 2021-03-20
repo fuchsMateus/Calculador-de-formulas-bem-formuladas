@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import application.Main;
 import entities.view.Painel1;
 import entities.view.Painel2;
+import services.Operacoes;
 
 
 public class Tela extends JFrame {
@@ -41,7 +42,9 @@ public class Tela extends JFrame {
 						return;
 					}
 					///////////////
+					
 					FBF fbf = new FBF(painel1.getCampoFBF().getText());
+					
 					fbf.inicializarFBF();
 					
 					fbf.processarFBF();
@@ -50,15 +53,32 @@ public class Tela extends JFrame {
 					List<Variavel>variaveis  = fbf.getVariaveis();
 					Main.tela.remove(painel1);
 					Main.tela.validate();
+					Main.tela.repaint();
 					painel2 = new Painel2(variaveis, painel1.getCampoFBF().getText());
+					
 					Main.tela.add(painel2);
-					Main.tela.revalidate();
+					Main.tela.revalidate();	
+					Main.tela.repaint();
 					
+					painel2.getVoltar().addActionListener( new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Main.tela.remove(painel2);
+							Main.tela.revalidate();
+							Main.tela.repaint();
+							painel2 = null;
 					
-				
+							
+							Main.tela.add(painel1);
+							Main.tela.revalidate();
+							Main.tela.repaint();		
+							
+						}
+					});
+					
 			}
 		});
-		
 		
 		setVisible(true);	
 		

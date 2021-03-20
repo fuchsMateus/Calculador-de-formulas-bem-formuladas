@@ -16,11 +16,6 @@ public class Main {
 		 *condicional = ~
 		 *bi-condicional = %
 		 */
-			
-		
-	
-		
-	
 	}
 	
 	

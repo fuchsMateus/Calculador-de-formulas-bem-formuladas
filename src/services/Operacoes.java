@@ -14,6 +14,9 @@ public class Operacoes {
 
 	public static void processar(List<Variavel> variaveis, String enunciado) {
 		
+		valoresPossiveis.clear();
+		resultados.clear();
+		passoAPasso.clear();
 		//processa a fbf para cada possibilidade
 				for(Integer i = 0; i < (int) Math.pow(2, variaveis.size()); i++) {
 					if(i == 0) {
@@ -267,6 +270,18 @@ public class Operacoes {
 
 	public static List<String> getPassoAPasso() {
 		return passoAPasso;
+	}
+
+	public static void setResultados(LinkedHashMap<Integer[], Integer> resultados) {
+		Operacoes.resultados = resultados;
+	}
+
+	public static void setValoresPossiveis(List<Integer[]> valoresPossiveis) {
+		Operacoes.valoresPossiveis = valoresPossiveis;
+	}
+
+	public static void setPassoAPasso(List<String> passoAPasso) {
+		Operacoes.passoAPasso = passoAPasso;
 	}
 
 	
