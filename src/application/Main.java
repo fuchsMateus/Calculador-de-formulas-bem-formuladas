@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import entities.FBF;
+import entities.Tela;
 import entities.Variavel;
 import services.Operacoes;
 
@@ -18,6 +19,8 @@ public class Main {
 		 *bi-condicional = %
 		 */
 			
+		Tela tela = new Tela();
+		
 		Scanner sc = new Scanner(System.in);
 		
 		
@@ -69,6 +72,7 @@ public class Main {
 		resultado = resultado.replace('1', 'V');
 		System.out.println(resultado);
 		////////////////////////////////////////////////
+
 		System.out.print("Digite 1 para ver o passo a passo ou 0 para encerrar o programa: ");
 		int escolha = sc.nextInt();
 		sc.close();
@@ -93,7 +97,6 @@ public class Main {
 				return false;
 			}
 				
-			
 			if((enunciado.length() != 1) && (i != enunciado.length()-1) && (enunciado.charAt(i) == 'A' || enunciado.charAt(i) == 'B'
 				|| enunciado.charAt(i) == 'C' || enunciado.charAt(i) == 'D'
 				|| enunciado.charAt(i) == 'E') && (enunciado.charAt(i+1) != '&' &&
@@ -154,4 +157,5 @@ public class Main {
 				System.out.print(" = ");
 		}
 	}
+	
 }
