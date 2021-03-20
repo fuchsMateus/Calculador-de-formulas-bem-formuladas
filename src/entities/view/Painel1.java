@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -21,6 +23,8 @@ public class Painel1 extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1960628858830049130L;
+	
+	
 	private JLabel titulo = new JLabel("Calculador de FBFs");
 	private JLabel regras = new JLabel("<html>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conectivo Lógico: NÃO = -<br>"
 										+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conectivo Lógico: E = &<br>"
@@ -40,6 +44,7 @@ public class Painel1 extends JPanel{
 	private JButton disjuncao = new JButton("|");
 	private JButton condicional = new JButton("~");
 	private JButton bicondicional = new JButton("%");
+	private JButton apagarTudo = new JButton("X");
 	
 	public Painel1() {
 	    GridBagLayout gridBagLayout = new GridBagLayout();
@@ -49,7 +54,7 @@ public class Painel1 extends JPanel{
 		gridBagConstraints.gridy = 0;
 		gridBagConstraints.gridwidth = 10;
 		gridBagConstraints.insets = new Insets(0, 0, 0, 0);
-		gridBagConstraints.anchor = gridBagConstraints.CENTER;
+		gridBagConstraints.anchor = GridBagConstraints.CENTER;
 		
 		
 		setLayout(gridBagLayout);
@@ -84,6 +89,9 @@ public class Painel1 extends JPanel{
 			    if (Character.isLowerCase(keyChar)) {
 			      e.setKeyChar(Character.toUpperCase(keyChar));
 			    }
+			    if (Character.isWhitespace(keyChar)) {
+				     e.consume();
+			    }
 			  }
 
 			});
@@ -96,17 +104,69 @@ public class Painel1 extends JPanel{
 		gridBagConstraints.gridwidth = 1;
 		
 		
-		add(Box.createHorizontalStrut(94), gridBagConstraints);
+		add(Box.createHorizontalStrut(93), gridBagConstraints);
 		gridBagConstraints.gridx++;
+		negacao.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				campoFBF.setText(campoFBF.getText()+"-");
+				
+			}
+		});
 		add(negacao, gridBagConstraints);
 		gridBagConstraints.gridx++;
+		conjuncao.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				campoFBF.setText(campoFBF.getText()+"&");
+				
+			}
+		});
 		add(conjuncao, gridBagConstraints);
 		gridBagConstraints.gridx++;
+		disjuncao.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				campoFBF.setText(campoFBF.getText()+"|");
+				
+			}
+		});
 		add(disjuncao, gridBagConstraints);
 		gridBagConstraints.gridx++;
+		condicional.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				campoFBF.setText(campoFBF.getText()+"~");
+				
+			}
+		});
 		add(condicional, gridBagConstraints);
 		gridBagConstraints.gridx++;
+		bicondicional.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				campoFBF.setText(campoFBF.getText()+"%");
+				
+			}
+		});
 		add(bicondicional, gridBagConstraints);
+		gridBagConstraints.gridx++;
+		add(Box.createHorizontalStrut(16), gridBagConstraints);
+		gridBagConstraints.gridx++;
+		apagarTudo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				campoFBF.setText("");
+				
+			}
+		});
+		add(apagarTudo, gridBagConstraints);
 		gridBagConstraints.gridy++;
 		
 		gridBagConstraints.gridx = 0;
@@ -120,4 +180,16 @@ public class Painel1 extends JPanel{
 		
 		setBackground(Color.white);
 	}
+
+	public JButton getProcessar() {
+		return processar;
+	}
+
+	public JTextField getCampoFBF() {
+		return campoFBF;
+	}
+
+	
+
+	
 }
