@@ -1,6 +1,8 @@
 package entities;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -26,10 +28,12 @@ public class Tela extends JFrame {
 
 	public Tela() {
 		setSize(new Dimension(540, 540));
-		setTitle("Teste");
+		setTitle("Calculador de FBFs");
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setBackground(Color.white);
+		Image icon = Toolkit.getDefaultToolkit().getImage("src/icon.png");
+		setIconImage(icon);
 		add(painel1);
 	
 		painel1.getProcessar().addActionListener( new ActionListener() {
