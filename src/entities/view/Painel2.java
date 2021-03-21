@@ -26,9 +26,10 @@ public class Painel2 extends JPanel{
 	 */
 	private static final long serialVersionUID = 1960628858830049130L;
 	
+	private List<String> passoAPasso;
 	
 	private JButton voltar = new JButton("Voltar");
-	private JButton resolucao = new JButton("Resolução");
+	private JButton resolucao = new JButton("Resoluções");
 	private JTable table;
 	
 	
@@ -53,7 +54,7 @@ public class Painel2 extends JPanel{
 		LinkedHashMap<Integer[], Integer> resultados = Operacoes.getResultados();
 		
 		List<Integer[]> valoresPossiveis = Operacoes.getValoresPossiveis();
-		List<String> passoAPasso = Operacoes.getPassoAPasso();
+		passoAPasso = Operacoes.getPassoAPasso();
 		
 		
 		String[] columns = new String[variaveis.size()+1];
@@ -128,6 +129,11 @@ public class Painel2 extends JPanel{
 
 	public JButton getResolucao() {
 		return resolucao;
+	}
+
+
+	public List<String> getPassoAPasso() {
+		return passoAPasso;
 	}
 
 	

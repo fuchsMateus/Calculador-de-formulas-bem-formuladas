@@ -10,12 +10,13 @@ import javax.swing.JFrame;
 import application.Main;
 import entities.view.Painel1;
 import entities.view.Painel2;
-import services.Operacoes;
+import entities.view.Painel3;
 
 
 public class Tela extends JFrame {
 	private Painel1 painel1 = new Painel1();
 	private Painel2 painel2;
+	private Painel3 painel3;
 
 		
 	/**
@@ -72,7 +73,39 @@ public class Tela extends JFrame {
 							
 							Main.tela.add(painel1);
 							Main.tela.revalidate();
-							Main.tela.repaint();		
+							Main.tela.repaint();	
+							
+						}
+					});
+					
+					painel2.getResolucao().addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Main.tela.remove(painel2);
+							Main.tela.validate();
+							Main.tela.repaint();
+							painel3 = new Painel3(painel2.getPassoAPasso(), painel1.getCampoFBF().getText());
+							
+							Main.tela.add(painel3);
+							Main.tela.revalidate();	
+							Main.tela.repaint();
+							
+							painel3.getVoltar2().addActionListener(new ActionListener() {
+								
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									Main.tela.remove(painel3);
+									Main.tela.revalidate();
+									Main.tela.repaint();
+									painel3 = null;
+							
+									
+									Main.tela.add(painel2);
+									Main.tela.revalidate();
+									Main.tela.repaint();	
+								}
+							});
 							
 						}
 					});

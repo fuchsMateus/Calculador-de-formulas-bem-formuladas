@@ -76,23 +76,27 @@ public class Main {
 		
 	}
 	
-	public static void printSolucoes(List<String> passoAPasso, String enunciado) {
+	public static String printSolucoes(List<String> passoAPasso, String enunciado) {
+		StringBuilder sb = new StringBuilder();
 		int vControle = 1;
-		System.out.print(vControle+": "+enunciado+" = ");
+		sb.append("<html>");
+		sb.append(vControle+": "+enunciado+" = ");
 		for (int i = 0; i < passoAPasso.size(); i++) {
 			passoAPasso.set(i, passoAPasso.get(i).replace('0', 'F'));
 			passoAPasso.set(i, passoAPasso.get(i).replace('1', 'V'));
 			passoAPasso.set(i, passoAPasso.get(i).replace('*', '&'));
 			passoAPasso.set(i, passoAPasso.get(i).replace('+', '|'));
-			System.out.print(passoAPasso.get(i));
+			sb.append(passoAPasso.get(i));
 			if(passoAPasso.get(i).contains("FIM") && i != passoAPasso.size()-1) {
-				System.out.println("\n");
-				System.out.print(++vControle+": "+enunciado+" = ");
+				sb.append("<br><br>");
+				sb.append(++vControle+": "+enunciado+" = ");
 			}
 			else
 				if(i != passoAPasso.size()-1)
-				System.out.print(" = ");
+					sb.append(" = ");
 		}
+		sb.append("</html");
+		return sb.toString();
 	}
 	
 }
