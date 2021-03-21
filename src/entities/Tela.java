@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -35,7 +37,17 @@ public class Tela extends JFrame {
 		Image icon = Toolkit.getDefaultToolkit().getImage("src/icon.png");
 		setIconImage(icon);
 		add(painel1);
-	
+		
+		addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                // Dispose Java (TM) Platform SE binary.
+                dispose();
+                // Close the Java.exe I'm not sure.
+                System.exit(0);
+            }
+        });
+    
+		
 		painel1.getProcessar().addActionListener( new ActionListener() {
 			
 				@Override

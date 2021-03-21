@@ -38,7 +38,7 @@ public class Main {
 				|| jText.getText().charAt(i) == 'C' || jText.getText().charAt(i) == 'D'
 				|| jText.getText().charAt(i) == 'E') && (jText.getText().charAt(i+1) != '&' &&
 				jText.getText().charAt(i+1) != '|' && jText.getText().charAt(i+1) != '~'
-				&& jText.getText().charAt(i+1) != '%' && jText.getText().charAt(i+1) != '(' && jText.getText().charAt(i+1) != ')')){
+				&& jText.getText().charAt(i+1) != '%'  && jText.getText().charAt(i+1) != ')')){
 				jText.setText("A FBF digitada não é válida");
 				return false;
 			}
